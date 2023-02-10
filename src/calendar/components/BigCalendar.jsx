@@ -1,0 +1,110 @@
+import { useEffect, useState } from 'react';
+import { Calendar } from 'react-big-calendar';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+
+import { Box, IconButton } from '@mui/material';
+import { AddOutlined, DeleteOutlined } from '@mui/icons-material';
+
+import { getMessagesES, localizer } from '../helpers';
+import { CalendarEvent } from './';
+import { useCalendarStore, useUiStore } from '../../hooks';
+
+
+export const BigCalendar = () => {
+
+    const {events, activeEvent, setActiveEvent, startDeletingEvent, startLoadingEvents} = useCalendarStore();
+
+    const {  openDateModal } = useUiStore();
+
+    const [view, setView] = useState(localStorage.getItem('lastView') || 'month');
+
+    const eventStyleGetter = (event, start, end, isSelected) => {
+        const style = {
+            // backgroundColor: (event.user._id === '123') ? '#367CF7' : '#465660',
+            backgroundColor: '#465660',
+            borderRadius: '0px',
+            opacity: 0.8,
+            color: 'white'
+        }
+        return {
+            style
+        }
+    }
+
+    const onSelect = (event) => {
+        setActiveEvent(event);
+    }
+
+    const onDoubleClick = (event) => {
+        openDateModal();
+    }
+
+    const onViewChanged = (event) => {
+        setView(event)
+        localStorage.setItem('lastView', event)
+    }
+
+    const onDelete = () => {
+        startDeletingEvent(activeEvent);
+    }
+     
+    useEffect(() => {
+        startLoadingEvents();
+    }, []);
+
+  return (
+    <Box>   
+        <Calendar 
+            culture='es'
+            localizer={localizer}
+            events={events}
+            defaultView={view}
+            startAccessor="start"
+            endAccessor="end"
+            style={{ height: 'calc( 100vh - 64px)'}}
+            messages={getMessagesES()}
+            eventPropGetter={eventStyleGetter}
+            components={{ event: CalendarEvent }}
+            onSelectEvent={ onSelect }
+            onDoubleClickEvent={ onDoubleClick }
+            onView={ onViewChanged }
+        />
+        
+        <IconButton
+            sx={{
+                display: `${events.length > 0 ? 'flex' : 'none'}`,
+                position: 'fixed',
+                bottom: '80px',
+                right: '20px',
+                backgroundColor: 'error.main',
+                color: 'white',
+                '&:hover': {
+                    backgroundColor: 'error.dark'
+                },                
+            }}
+            onClick={ onDelete }
+        >
+            <DeleteOutlined 
+            />
+        </IconButton>
+        
+        <IconButton
+            sx={{
+                position: 'fixed',
+                bottom: '20px',
+                right: '20px',
+                backgroundColor: 'primary.main',
+                color: 'white',
+                '&:hover': {
+                    backgroundColor: 'primary.dark'
+                }
+            }}
+            onClick={ openDateModal }
+        >
+            <AddOutlined 
+                fontSize='large'
+            />
+        </IconButton>
+  </Box>
+  )
+}

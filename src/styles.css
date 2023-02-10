@@ -1,0 +1,17 @@
+/* 
+.jota{
+    background-color: #e9cfa9;
+
+} */
+
+.form-control{
+    border: 1px solid #918779;
+    border-radius: 5px;
+    box-shadow: none;
+    color: #000;
+    font-size: 16px;
+    height: auto;
+    padding: 8px 12px;
+    width: 100%;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+}
