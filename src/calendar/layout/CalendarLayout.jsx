@@ -33,4 +33,3 @@ export const CalendarLayout = ({children}) => {
 }
 
 
-{/* <FootBar /> */} //* Falta el Footer mi rey

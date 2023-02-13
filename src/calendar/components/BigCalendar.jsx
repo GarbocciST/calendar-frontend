@@ -8,10 +8,13 @@ import { AddOutlined, DeleteOutlined } from '@mui/icons-material';
 import { getMessagesES, localizer } from '../helpers';
 import { CalendarEvent } from './';
 import { useAuthStore, useCalendarStore, useUiStore } from '../../hooks';
+import { onClearActiveEvent } from '../../store';
+import { useDispatch } from 'react-redux';
 
 
 export const BigCalendar = () => {
 
+    const dispatch = useDispatch();
     const {events, activeEvent, setActiveEvent, startDeletingEvent, startLoadingEvents} = useCalendarStore();
     const { user } = useAuthStore();
     const {  openDateModal } = useUiStore();
@@ -40,6 +43,7 @@ export const BigCalendar = () => {
 
     const onDoubleClick = (event) => {
         openDateModal();
+        // dispatch(onClearActiveEvent())
     }
 
     const onViewChanged = (event) => {

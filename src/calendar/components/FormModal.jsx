@@ -12,7 +12,7 @@ const startDate = new Date();
 export const FormModal = ({handleClose}) => {
   const { events, activeEvent, startSavingEvent } = useCalendarStore();
   
-  const { register, formState: {errors}, reset, handleSubmit, control, watch} = useForm ({
+  const { register, formState: {errors}, reset, handleSubmit, control} = useForm ({
         defaultValues: {
             title:  activeEvent ? activeEvent.title : '',
             start:  activeEvent ? activeEvent.start : '',

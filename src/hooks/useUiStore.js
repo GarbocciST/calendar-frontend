@@ -9,7 +9,6 @@ export const useUiStore = () => {
     
     const openDateModal = () => {
        dispatch(onOpenDateModal())
-       dispatch(onClearActiveEvent())
     };
 
     const closeDateModal = () => {
