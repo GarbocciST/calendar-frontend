@@ -5,7 +5,6 @@ import { getEnvVariables } from "../helpers";
 const { VITE_API_URL } = getEnvVariables();
 
 const calendarApi = axios.create({
-    // baseURL: 'https://calendar-back.up.railway.app/api'
     baseURL: VITE_API_URL
 });
 
