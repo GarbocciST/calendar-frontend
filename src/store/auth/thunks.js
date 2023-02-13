@@ -1,4 +1,5 @@
 import calendarApi from "../../api/calendarApi";
+import { onClearEvents } from "../calendar";
 import { onChecking, onLogin, onLogout } from "./authSlice"
 
 
@@ -54,6 +55,7 @@ export const startRegister = ( userData) => {
 export const startLogout = () => {
     return async(dispatch) => {
         localStorage.clear();
+        dispatch(onClearEvents())
         dispatch(onLogout());
     }
 

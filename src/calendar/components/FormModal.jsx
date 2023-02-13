@@ -22,8 +22,10 @@ export const FormModal = ({handleClose}) => {
   })
 
     const onSubmitted = async(data) => {
-        // console.log(data)
-        await startSavingEvent(data);
+        
+        (activeEvent) 
+        ? await startSavingEvent({...data, id: activeEvent.id})
+        : await startSavingEvent( data )
         
         reset ({
             title: '',

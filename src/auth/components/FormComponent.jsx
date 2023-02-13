@@ -1,4 +1,4 @@
-import { Button, Grid, Link, TextField } from '@mui/material';
+import { Button, Grid, Link, TextField, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { Link as RouterLink} from 'react-router-dom';
@@ -84,7 +84,17 @@ export const FormComponent = ({title}) => {
                     {...register("password", {required: 'El nombre es obligatorio ' })}
                 />
                 {errors?.password && <span className="text-danger text-small d-block mb-2">{errors.password.message}</span>}
-
+                
+                <Typography
+                    variant="body1"
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        flexDirection: 'row',
+                        color: 'red'
+                    }}
+                > {errorMessage} </Typography>
 
                 <Grid 
                     container

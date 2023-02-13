@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {  Navigate, Route, Routes } from "react-router-dom"
+import { useAuthStore } from "../hooks";
+import { LoadingComponent } from "../auth/components";
 import { AuthRoute } from "../auth/routes/AuthRoute"
 import { CalendarRoute } from "../calendar/routes/CalendarRoute"
-import { useAuthStore } from "../hooks";
 import { checkAuthToken } from "../store/auth/thunks";
 
 
@@ -19,15 +20,13 @@ export const AppRouter = () => {
   
   if (status === 'checking') {
     return (
-      <h1>Cargando...</h1>
+      <LoadingComponent />
       )
     }
     
-
   return (
     <Routes>
       {
-        // (status === 'checking') && (<h1>Wait...</h1>)
         (status === 'authenticated') 
         ? <Route path="/*" element={<CalendarRoute />} />
         : <Route path="/auth/*" element={<AuthRoute />} />

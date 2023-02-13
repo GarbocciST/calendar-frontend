@@ -7,21 +7,24 @@ import { AddOutlined, DeleteOutlined } from '@mui/icons-material';
 
 import { getMessagesES, localizer } from '../helpers';
 import { CalendarEvent } from './';
-import { useCalendarStore, useUiStore } from '../../hooks';
+import { useAuthStore, useCalendarStore, useUiStore } from '../../hooks';
 
 
 export const BigCalendar = () => {
 
     const {events, activeEvent, setActiveEvent, startDeletingEvent, startLoadingEvents} = useCalendarStore();
-
+    const { user } = useAuthStore();
     const {  openDateModal } = useUiStore();
 
     const [view, setView] = useState(localStorage.getItem('lastView') || 'month');
 
     const eventStyleGetter = (event, start, end, isSelected) => {
+
+        const isMyEvent = ( user.uid === event.user._id) || (user.uid === event.user.uid );
+
         const style = {
             // backgroundColor: (event.user._id === '123') ? '#367CF7' : '#465660',
-            backgroundColor: '#465660',
+            backgroundColor: isMyEvent ? '#347CF7' : '#465660',
             borderRadius: '0px',
             opacity: 0.8,
             color: 'white'

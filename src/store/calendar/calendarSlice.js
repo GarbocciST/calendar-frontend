@@ -14,6 +14,9 @@
             onsetActiveEvent: (state, {payload}) => {
                 state.activeEvent = payload;
             },
+            onClearActiveEvent: (state) => {
+                state.activeEvent = null;
+            },
             onAddNewEvent: (state, {payload}) => {
                 state.events.push(payload);
                 state.activeEvent = null;
@@ -41,10 +44,23 @@
                     }
                 })
 
+            },
+            onClearEvents: (state) => {
+                isLoadingevents = false;
+                state.events = [];
+                activeEvent = null;
             }
         }
     });
 
 
     // Action creators are generated for each case reducer function
-    export const { onsetActiveEvent, onAddNewEvent, onDeleteEvent, onLoadEvents ,onUpdateEvent} = calendarSlice.actions;
+    export const { 
+        onsetActiveEvent,
+        onAddNewEvent, 
+        onDeleteEvent, 
+        onLoadEvents ,
+        onUpdateEvent, 
+        onClearActiveEvent,
+        onClearEvents
+        } = calendarSlice.actions;
