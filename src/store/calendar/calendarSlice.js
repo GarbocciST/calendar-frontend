@@ -5,7 +5,7 @@
     export const calendarSlice = createSlice({
        name: 'calendar',
        initialState: {
-            isLoadingevents: false,
+            isLoadingEvents: false,
             events: [],
             activeEvent: null,
 
@@ -36,7 +36,7 @@
                 state.activeEvent = null;
             },
             onLoadEvents: (state, {payload}) => {
-                state.isLoadingevents = false;
+                state.isLoadingEvents = false;
                 payload.forEach(event => {
                     const exists = state.events.some( dbEvent => dbEvent.id === event.id );
                     if(!exists){
@@ -46,9 +46,9 @@
 
             },
             onClearEvents: (state) => {
-                isLoadingevents = false;
+                state.isLoadingEvents = false;
                 state.events = [];
-                activeEvent = null;
+                state.activeEvent = null;
             }
         }
     });
