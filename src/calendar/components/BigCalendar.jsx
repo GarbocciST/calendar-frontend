@@ -26,7 +26,6 @@ export const BigCalendar = () => {
         const isMyEvent = ( user.uid === event.user._id) || (user.uid === event.user.uid );
 
         const style = {
-            // backgroundColor: (event.user._id === '123') ? '#367CF7' : '#465660',
             backgroundColor: isMyEvent ? '#347CF7' : '#465660',
             borderRadius: '0px',
             opacity: 0.8,
@@ -43,7 +42,7 @@ export const BigCalendar = () => {
 
     const onDoubleClick = (event) => {
         openDateModal();
-        // dispatch(onClearActiveEvent())
+        
     }
 
     const onViewChanged = (event) => {
@@ -53,6 +52,11 @@ export const BigCalendar = () => {
 
     const onDelete = () => {
         startDeletingEvent(activeEvent);
+    }
+
+    const onClickNewEvent = () => {
+        dispatch(onClearActiveEvent());
+        openDateModal();
     }
      
     useEffect(() => {
@@ -106,7 +110,7 @@ export const BigCalendar = () => {
                     backgroundColor: 'primary.dark'
                 }
             }}
-            onClick={ openDateModal }
+            onClick={ onClickNewEvent}
         >
             <AddOutlined 
                 fontSize='large'
